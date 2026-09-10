@@ -17,6 +17,19 @@ enum Color {
     NO_COLOR
 };
 
+char piece_to_char(int piece, int color)
+{
+    switch (piece) {
+        case ROOK:   return color == WHITE ? 'R' : 'r';
+        case KNIGHT: return color == WHITE ? 'N' : 'n';
+        case BISHOP: return color == WHITE ? 'B' : 'b';
+        case QUEEN:  return color == WHITE ? 'Q' : 'q';
+        case KING:   return color == WHITE ? 'K' : 'k';
+        case PAWN:   return color == WHITE ? 'P' : 'p';
+        default:     return '.';
+    }
+}
+
 int pieces[64] = {
     ROOK,  KNIGHT, BISHOP, QUEEN, KING,  BISHOP, KNIGHT, ROOK,
     PAWN,  PAWN,   PAWN,   PAWN,  PAWN,  PAWN,  PAWN,   PAWN,
@@ -47,18 +60,24 @@ int colors[64] = {
     WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE
 };
 
-int main() {
-    for (int rank=0; rank<8; rank++) {
-        printf("%d ", 8-rank);
-        for (int file=0; file<8; file++) {
+int main(void) {
+    for (int rank = 0; rank < 8; rank++) {
+        printf("%d ", 8 - rank);
+
+        for (int file = 0; file < 8; file++) {
             int square = rank * 8 + file;
-            if (pieces[square] != NO_PIECE) {
+
+            if (pieces[square] == NO_PIECE) {
                 printf(". ");
             } else {
-                printf("# ");
+                printf("%c ", piece_to_char(pieces[square], colors[square]));
             }
         }
+
         printf("\n");
     }
-    printf("  a b c d e f g h \n");
+
+    printf("  a b c d e f g h\n");
+
+    return 0;
 }
