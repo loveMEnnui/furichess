@@ -48,5 +48,17 @@ int colors[64] = {
 };
 
 int main() {
-    return 0;
+    for (int rank=0; rank<8; rank++) {
+        printf("%d ", 8-rank);
+        for (int file=0; file<8; file++) {
+            int square = rank * 8 + file;
+            if (pieces[square] != NO_PIECE) {
+                printf(". ");
+            } else {
+                printf("# ");
+            }
+        }
+        printf("\n");
+    }
+    printf("  a b c d e f g h \n");
 }
